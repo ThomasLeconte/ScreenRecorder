@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title id="title">Le concurrent à OBS - By Toto</title>
+    <link rel="stylesheet" href="bulma-0.6.2/css/bulma.css">
+    <link rel="stylesheet" href="index.css">
+    <script defer src="render.js"></script>
+    <script src="https://kit.fontawesome.com/50db597567.js" crossorigin="anonymous"></script>
+    <style>
+      html{
+        -webkit-app-region: drag;
+        background-color: #2c3e50;
+        overflow: hidden; /* Hide scrollbars */
+        border-radius:10px;
+      }
+      body{
+        -webkit-app-region: no-drag;
+        border-radius:10px;
+      }
+      h1,button{
+        color:white;
+      }
+      #videoSelectBtn{
+        color: black;
+        padding: 9px;
+        background-color: #ecf0f1;
+        border: none;
+        border-radius: 3px;
+        transition: 0.2s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div id="titleShown">
+
+      </div>
+      <div class="navbar-content">
+        <a class="navbar-item" id="close-item" href="#"><i class="fas fa-times"></i></a>
+        <a class="navbar-item" id="minimize-item" href="#"><i class="far fa-window-minimize"></i></a>
+      </div>
+      </a>
+    </nav>
+
+    <center>
+      <h1> 📲 Screen recorder </h1>
+      
+      <div id="videoDifusing">
+        <video style="z-index: -1;"></video>
+      </div>
+
+      <button id="videoSelectBtn" onclick="getVideoSources()">
+        Choose a source video
+      </button>
+      <button id="startBtn" class="button is-primary">Start</button>
+      <button id="stopBtn" class="button is-warning">Stop</button>
+    </center>
+  </body>
+</html>

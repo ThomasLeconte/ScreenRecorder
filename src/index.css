@@ -1,0 +1,53 @@
+.navbar{
+  display: block;
+  width: 100%;
+  height: 25px;
+  background-color: #333333;
+  -webkit-app-region: drag;
+  box-shadow: 3px 0px 5px rgb(0, 0, 0);  /* Opera 10.5, IE 9, Firefox 4+*/
+  margin-bottom: 20px;
+}
+
+#titleShown{
+  width: 50%;
+  height:100%;
+  line-height: 40px;
+  color: #f7f7f7;
+  font-size: 1em;
+  font-weight: bold;
+  float: left;
+  padding: 0.5em 0 0 1em;
+}
+
+.navbar-item{
+  float: right;
+  width: 50px;
+  height: 100%;
+  line-height: 40px;
+  -webkit-app-region: no-drag;
+  padding: 6.5px 13px 6.5px 13px;
+  font-size: 1.5em;
+}
+
+#close-item:hover{
+  color: #c0392b;
+  transition: 0.2s ease-in-out;
+}
+
+#minimize-item:hover{
+  color:black;
+  transition: 0.2s ease-in-out;
+}
+
+#videoDifusing{
+  width: 90%;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+video{
+  border-radius: 10px;
+}
