@@ -1,3 +1,11 @@
+//imports
+const {desktopCapturer, remote } = require('electron');
+const {Menu, dialog, Notification} = remote;
+const {writeFile} = require('fs');
+const { electron } = require('process');
+const puppeteer = require('puppeteer');
+
+
 //title
 var title = document.getElementById('title');
 document.getElementById('titleShown').innerHTML = title.textContent;
@@ -35,11 +43,6 @@ videoSelectBtn.onClick = getVideoSources;
 
 let mediaRecorder;
 const recordedChuncks = [];
-
-const {desktopCapturer, remote } = require('electron');
-const {Menu, dialog, Notification} = remote;
-const {writeFile} = require('fs');
-const { electron } = require('process');
 
 //get available screens
 async function getVideoSources(){
@@ -127,4 +130,47 @@ window.onload = async function(){
         types:['window', 'screen']
     });
     selectSource(inputSources[0]);
+
+    const url = 'https://www.ldlc.com/informatique/pieces-informatique/processeur/c4300/';
+    //appel de la fonction pour scraper
+    scrapeProducts(url);
+    //await page.screenshot({path: './screenshots/site1.png'});
 }
+
+async function scrapeProducts(url){
+    //Lancement d'un naviguateur invisible
+    const browser = await puppeteer.launch();
+    //nouvel onglet
+    const page = await browser.newPage();
+    //redirection vers l'url
+    await page.goto(url);
+
+    const products = await page.evaluate(()=>{
+        //Tout les selecteurs CSS
+        const productName = 'div > div:nth-child(1) > div:nth-child(1) > h3:nth-child(1)';
+        const productPrice = 'div > div:nth-child(4) > div:nth-child(1) > div:nth-child(1)';
+
+        //constante qui récupère la valeur de l'élement ciblé par le selecteur CSS
+        const grabFromRow = (row, classname)=>row
+        .querySelector(classname)
+        .innerText
+        .trim();
+
+        const productRowSelector = '.listing-product ul:nth-child(1) > li.pdt-item';
+
+        const data = [];
+
+        const productRows = document.querySelectorAll(productRowSelector);
+
+        for(const li of productRows){
+            data.push({
+                name: grabFromRow(li, productName),
+                price: grabFromRow(li, productPrice)
+            })
+        }
+        return data;
+    });
+    console.log(products);
+}
+
+
